@@ -18,7 +18,7 @@ def obtenir_chemin_favori(network_dir: Path) -> Path:
 def charger_favori(favorites_path: Path) -> list[str]:
     """Lit la liste des IDs favoris depuis favorites.json."""
     if not favorites_path.exists():
-        return []
+        return [] 
 
     try:
         text = favorites_path.read_text(encoding="utf-8")
