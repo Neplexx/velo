@@ -48,12 +48,12 @@ def afficher_stations(paires: list, config: AppConfig, titre: str) -> None:
         )
     console.print(table)
 
-def cmd_init(config: AppConfig, config_path: Path | None = None, force: bool = False) -> None:
+def init(config: AppConfig, config_path: Path | None = None, force: bool = False) -> None:
     """Crée le fichier config.yaml par défaut"""
     chemin = save_config(config, config_path=config_path, force=force)
     console.print(f"[green]Configuration créée :[/green] {chemin}")
 
-def cmd_refresh(config: AppConfig) -> None:
+def refresh(config: AppConfig) -> None:
     """Télécharge les données de gbfs"""
     gbfs = recuperer_gbfs(config.network.gbfs_url)
     config.data.folder.mkdir(parents=True, exist_ok=True)
@@ -71,12 +71,12 @@ def joindre_stations(config: AppConfig) -> list[tuple[StationInfo, Station]]:
             paires.append((info, etats[info.station_id]))
     return paires
 
-def cmd_station_list(config: AppConfig) -> None:
+def station_liste(config: AppConfig) -> None:
     """Récupère et affiche toutes les stations"""
     paires = joindre_stations(config)
     afficher_stations(paires, config, f"Stations ({len(paires)})")
 
-def cmd_station_search(config: AppConfig, texte: str) -> None:
+def station_cherche(config: AppConfig, texte: str) -> None:
     """Recherche les stations avec le nom"""
     try:
         motif = re.compile(texte, re.IGNORECASE) #enlève les maj etc
